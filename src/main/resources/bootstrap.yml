@@ -1,0 +1,44 @@
+# 端口配置
+server:
+  port: 7080 #固定端口
+  # port: ${randomServerPort.value[7000,7005]} # 随机端口
+
+# grpc 随机端口
+grpc:
+  server:
+    port: 0
+
+# 服务名称
+spring:
+  application:
+    name: display-route-sync
+
+# 加载所有的端点/默认只加载了 info / health# metrics 监控指标的度量类库 https://www.jianshu.com/p/effe8e259d25 加载所有的端点/默认只加载了 info / health https://www.kancloud.cn/fymod/springcloud2/784128
+management:
+  endpoints:
+    web:
+      base-path: /actuator # 修改访问路径  2.0之前默认是/ 2.0默认是 /actuator 可以通过这个属性值修改
+      exposure:
+        include: "*" # 开放所有页面节点  默认只开启了health、info两个节点
+  endpoint:
+    health:
+      show-details: always # 显示健康具体信息  默认不会显示详细信息
+
+# eureka client 注册中心配置
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://10.44.111.231:1111/eureka/
+    registry-fetch-interval-seconds: 10 # 从eureka服务端获取注册信息的间隔时间
+    instance-info-replication-interval-seconds: 10
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+    # instance-id: ${spring.application.name}:${docker.ipAddress}:${spring.application.instance_id:${server.port}} # docker
+    # instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${randomServerPort.value[8000,8000]}} # randomServerPort
+    lease-renewal-interval-in-seconds: 5 # 每隔几秒告诉eureka服务器我还存活，用于心跳检测
+    lease-expiration-duration-in-seconds: 10 # 如果心跳检测一直没有发送，10秒后会从eureka服务器中将此服务剔除
+    # 注册实例文档
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/doc.html
+    # status-page-url: http://${docker.ipAddress}:${server.port}/auth/doc.html # 固定端口
+    # status-page-url: http://${spring.cloud.client.ip-address}:${randomServerPort.value[8000,8000]}/document.html # 随机端口

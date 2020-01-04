@@ -1,0 +1,1 @@
+[localhost.log-0.0.0.0-0000] 2019-12-18 15:20:40.432 WARN 10156 [http-nio-8080-exec-4] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]

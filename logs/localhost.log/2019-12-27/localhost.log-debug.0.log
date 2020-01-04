@@ -1,0 +1,2 @@
+[localhost.log-0.0.0.0-0000] 2019-12-27 09:39:26.624 DEBUG 10380 [main] com.eagle.cloud.DisplayRouteSyncApp Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+[localhost.log-0.0.0.0-0000] 2019-12-27 11:10:23.504 DEBUG 1552 [main] com.eagle.cloud.DisplayRouteSyncApp Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
